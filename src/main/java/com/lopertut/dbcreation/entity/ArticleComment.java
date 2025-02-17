@@ -14,35 +14,22 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
-@Table
-public class Article {
+@Table(name = "article_comment")
+public class ArticleComment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @OneToOne
+    @JoinColumn(name = "article_id", nullable = false)
+    private Article article_id;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false, updatable = false)
     @CreationTimestamp
     private Date created_at;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(nullable = false)
-    @CreationTimestamp
-    private Date uploaded_at;
-
     @ManyToOne
     @JoinColumn(name = "author_id", nullable = false)
     private User author_id;
-
-    @Column(nullable = false, length = 50)
-    private String description;
-
-    @Column(nullable = false, length = 50)
-    private String slug;
-
-    @Column(nullable = false, length = 50)
-    private String title;
-
-    @Column(nullable = false, length = 1000)
-    private String content;
 }
