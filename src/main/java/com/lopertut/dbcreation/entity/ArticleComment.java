@@ -20,7 +20,7 @@ public class ArticleComment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "article_id", nullable = false)
     private Article article_id;
 
