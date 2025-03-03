@@ -9,30 +9,21 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.Date;
 
-@NoArgsConstructor
-@AllArgsConstructor
+@Entity
 @Getter
 @Setter
-@Entity
-@Table(name = "article_comment")
-public class ArticleComment {
+@NoArgsConstructor
+@AllArgsConstructor
+public class Tag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne
-    @JoinColumn(name = "article_id", nullable = false)
-    private Article article_id;
+    @Column(unique = true, nullable = false, length = 20)
+    private String name;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false, updatable = false)
     @CreationTimestamp
     private Date created_at;
-
-    @ManyToOne
-    @JoinColumn(name = "author_id", nullable = false)
-    private User author_id;
-
-    @Column(nullable = false, length = 500)
-    private String content;
 }
