@@ -39,4 +39,5 @@ public class User {
 
     @Column(nullable = false, length = 500)
     private String bio;
+
 }

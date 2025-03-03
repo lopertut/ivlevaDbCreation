@@ -14,7 +14,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
-@Table
+@Table(name = "articles")
 public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,7 +32,7 @@ public class Article {
 
     @ManyToOne
     @JoinColumn(name = "author_id", nullable = false)
-    private User author_id;
+    private User author;
 
     @Column(nullable = false, length = 50)
     private String description;
