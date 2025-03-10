@@ -1,4 +1,4 @@
-package com.lopertut.dbcreation.repository;
+package com.lopertut.dbcreation.repositories;
 
 import com.lopertut.dbcreation.entity.Tag;
 import org.springframework.data.jpa.repository.JpaRepository;

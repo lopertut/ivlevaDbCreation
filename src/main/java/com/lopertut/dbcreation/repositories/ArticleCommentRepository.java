@@ -1,4 +1,4 @@
-package com.lopertut.dbcreation.repository;
+package com.lopertut.dbcreation.repositories;
 
 import com.lopertut.dbcreation.entity.ArticleComment;
 import org.springframework.data.jpa.repository.JpaRepository;
