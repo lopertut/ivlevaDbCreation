@@ -12,7 +12,8 @@
         <tr>
             <th>ID</th>
             <th>username</th>
-            <th>BIO</th>
+            <th>email</th>
+            <th>bio</th>
         </tr>
         </thead>
         <TBODY>
@@ -22,7 +23,7 @@
             <td th:text="${user.getEmail()}"></td>
             <td th:text="${user.getBio()}"></td>
             <td>
-                <a th:href="@{/users/{id} (${user.getId()})}">Details</a>
+                <a th:href="@{/users/{id} (id=${user.getId()})}">Details</a>
                 <a th:href="@{/users/{id}/delete (id=${user.getId()})}"
                 onclick="return confirm('are you sure?')">Delete</a>
             </td>

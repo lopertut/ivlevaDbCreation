@@ -6,10 +6,12 @@
 </head>
 <body>
     <h2>Create New User</h2>
-    <form action="/authors/create" method="post" th:object="${user}">
+    <form action="/users/create" method="post" th:object="${user}">
         <label>username: <input type="text" th:field="*{username}" required/></label>
+        <label>password: <input type="password" th:field="*{password}" required></label>
         <label>email <input type="text" th:field="*{email}" required/></label>
         <label>Bio: <input type="text" th:field="*{bio}" required/></label>
+        <label>image url: <input type="url" th:field="*{image_url}"></label>
         <button type="submit">save</button>
     </form>
     <a href="users/">Back to list</a>
