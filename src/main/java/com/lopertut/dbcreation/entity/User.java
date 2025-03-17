@@ -2,17 +2,13 @@ package com.lopertut.dbcreation.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
 @Entity
 @Table(name = "users")
 public class User {
@@ -31,7 +27,7 @@ public class User {
     @Column(nullable = false, length = 30)
     private String username;
 
-    @Column(nullable = false, length = 200)
+    @Column(length = 200)
     private String image_url;
 
     @Column(nullable = false, length = 200)
@@ -39,4 +35,60 @@ public class User {
 
     @Column(nullable = false, length = 500)
     private String bio;
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setImage_url(String image_url) {
+        this.image_url = image_url;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setCreated_at(Date created_at) {
+        this.created_at = created_at;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public Date getCreated_at() {
+        return created_at;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getImage_url() {
+        return image_url;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getBio() {
+        return bio;
+    }
 }
