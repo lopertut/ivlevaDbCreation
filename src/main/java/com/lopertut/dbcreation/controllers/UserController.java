@@ -24,8 +24,8 @@ public class UserController {
 
     @GetMapping("/{id}")
     public String getUserById(@PathVariable Long id, Model model) {
-        Optional<User> user = userService.getUserById(id);
-        model.addAttribute("user", user);
+        Optional<User> optionalUser = userService.getUserById(id);
+        model.addAttribute("user", optionalUser.get());
         return "users/details";
     }
 
@@ -42,8 +42,22 @@ public class UserController {
     }
 
     @GetMapping("/{id}/delete")
-    public String deleteUser(@PathVariable Long id, Model model) {
+    public String deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
+        return "redirect:/users";
+    }
+
+
+    @GetMapping("/{id}/update")
+    public String showUpdateForm(@PathVariable Long id, Model model) {
+        Optional<User> optionalUser = userService.getUserById(id);
+        model.addAttribute("user", optionalUser.get());
+        return "users/update";
+    }
+
+    @PutMapping("/{id}/update")
+    public String updateUser(@ModelAttribute("user") User user) {
+        userService.updateUser(user);
         return "redirect:/users";
     }
 }

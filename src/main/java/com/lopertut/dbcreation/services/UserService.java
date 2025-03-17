@@ -30,8 +30,8 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public void updateUser(User user) {
-
+    public User updateUser(User user) {
+        return userRepository.save(user);
     }
 
     @Override

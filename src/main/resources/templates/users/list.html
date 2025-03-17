@@ -1,35 +1,35 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Users List</title>
+  <meta charset="UTF-8">
+  <title>Users List</title>
 </head>
 <body>
-    <h2>Users List</h2>
+<h2>Users List</h2>
 
-    <table border="1">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>username</th>
-            <th>email</th>
-            <th>bio</th>
-        </tr>
-        </thead>
-        <TBODY>
-        <tr th:each="user : ${users}">
-            <td th:text="${user.getId()}"></td>
-            <td th:text="${user.getUsername()}"></td>
-            <td th:text="${user.getEmail()}"></td>
-            <td th:text="${user.getBio()}"></td>
-            <td>
-                <a th:href="@{/users/{id} (id=${user.getId()})}">Details</a>
-                <a th:href="@{/users/{id}/delete (id=${user.getId()})}"
-                onclick="return confirm('are you sure?')">Delete</a>
-            </td>
-        </tr>
-        </TBODY>
-    </table>
+<table border="1">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>username</th>
+    <th>email</th>
+    <th>bio</th>
+  </tr>
+  </thead>
+  <TBODY>
+  <tr th:each="user : ${users}">
+    <td th:text="${user.getId()}"></td>
+    <td th:text="${user.getUsername()}"></td>
+    <td th:text="${user.getEmail()}"></td>
+    <td th:text="${user.getBio()}"></td>
+    <td>
+      <a th:href="@{/users/{id} (id=${user.getId()})}">Details</a>
+      <a th:href="@{/users/{id}/delete (id=${user.getId()})}"
+         onclick="return confirm('are you sure?')">Delete</a>
+    </td>
+  </tr>
+  </TBODY>
+</table>
 <a href="users/create">Create New User</a>
 </body>
 </html>
