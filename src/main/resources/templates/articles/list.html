@@ -1,10 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Articles list</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Статьи</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            width: 80%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .card h2 {
+            margin-top: 0;
+        }
+        .card p {
+            color: #555;
+        }
+    </style>
 </head>
 <body>
+<div class="container">
+    <div class="card" th:each="article : ${articles}">
+        <h2 th:text="${article.title}">Заголовок статьи</h2>
+        <p th:text="${article.description}">Краткое описание статьи.</p>
 
+        <a th:href="@{/articles/{id} (id=${article.getId()})}">Details</a>
+        <a th:href="@{/articles/{id}/delete (id=${article.getId()})}"
+           onclick="return confirm('are you sure?')">Delete</a>
+    </div>
+</div>
+<a href="articles/create">create new article</a>
 </body>
 </html>

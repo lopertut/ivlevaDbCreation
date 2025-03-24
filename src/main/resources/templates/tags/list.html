@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tags List</title>
+</head>
+<body>
+<h2>Tags List</h2>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <TBODY>
+    <tr th:each="tag : ${tags}">
+        <td th:text="${tag.getId()}"></td>
+        <td th:text="${tag.getName()}"></td>
+        <td>
+            <a th:href="@{/tags/{id}/delete (id=${tag.getId()})}"
+               onclick="return confirm('are you sure?')">Delete</a>
+        </td>
+    </tr>
+    </TBODY>
+</table>
+<a href="tags/create">Create New Tag</a>
+</body>
+</html>

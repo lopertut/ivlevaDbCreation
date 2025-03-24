@@ -2,17 +2,14 @@ package com.lopertut.dbcreation.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
 @Entity
 @Table(name = "articles")
 public class Article {
@@ -27,7 +24,7 @@ public class Article {
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
-    @CreationTimestamp
+    @UpdateTimestamp
     private Date uploaded_at;
 
     @ManyToOne
@@ -45,4 +42,68 @@ public class Article {
 
     @Column(nullable = false, length = 1000)
     private String content;
+
+    public long getId() {
+        return id;
+    }
+
+    public Date getCreated_at() {
+        return created_at;
+    }
+
+    public Date getUploaded_at() {
+        return uploaded_at;
+    }
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getSlug() {
+        return slug;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setCreated_at(Date created_at) {
+        this.created_at = created_at;
+    }
+
+    public void setUploaded_at(Date uploaded_at) {
+        this.uploaded_at = uploaded_at;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setSlug(String slug) {
+        this.slug = slug;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
 }

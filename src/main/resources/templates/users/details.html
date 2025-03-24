@@ -11,6 +11,8 @@
   <p><strong>ID:</strong> <span th:text="${user.id}"></span></p>
   <p><strong>Email:</strong> <span th:text="${user.email}"></span></p>
   <p><strong>Username:</strong> <span th:text="${user.username}"></span></p>
+  <p><strong>Bio:</strong> <span th:text="${user.bio}"></span></p>
+  <p><strong>Image url:</strong> <span th:url="${user.image_url}"></span></p>
   <p><strong>Created At:</strong> <span th:text="${#dates.format(user.created_at, 'yyyy-MM-dd HH:mm:ss')}"></span></p>
 </div>
 

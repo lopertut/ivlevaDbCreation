@@ -17,16 +17,16 @@ public class ArticleController {
     private ArticleService articleService;
 
     @GetMapping
-    public String getAllUsers(Model model) {
+    public String getAllArticles(Model model) {
         model.addAttribute("articles", articleService.getAllArticles());
         return "articles/list";
     }
 
     @GetMapping("/{id}")
-    public String getUserById(@PathVariable Long id, Model model) {
+    public String getArticleById(@PathVariable Long id, Model model) {
         Optional<Article> articleById = articleService.getArticleById(id);
         model.addAttribute("article", articleById.get());
-        return "users/details";
+        return "articles/details";
     }
 
     @GetMapping("/create")
@@ -36,13 +36,13 @@ public class ArticleController {
     }
 
     @PostMapping("/create")
-    public String createUser(@ModelAttribute("article") Article article) {
+    public String createArticle(@ModelAttribute("article") Article article) {
         articleService.createArticle(article);
         return "redirect:/articles";
     }
 
     @GetMapping("/{id}/delete")
-    public String deleteUser(@PathVariable Long id) {
+    public String deleteArticle(@PathVariable Long id) {
         articleService.deleteArticle(id);
         return "redirect:/articles";
     }
@@ -56,8 +56,8 @@ public class ArticleController {
     }
 
     @PutMapping("/{id}/update")
-    public String updateUser(@ModelAttribute("article") Article article) {
-        articleService.updateArticle(article);
+    public String updateArticle(@ModelAttribute("article") Article article) {
+        articleService. updateArticle(article);
         return "redirect:/articles";
     }
 }

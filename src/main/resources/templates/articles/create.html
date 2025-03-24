@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Create article</title>
+    <title>Create New Article</title>
 </head>
 <body>
-
+<h2>Create New Article</h2>
+<form action="/articles/create" method="post" th:object="${article}">
+    <label>Title: <input type="text" th:field="*{title}" required/></label>
+    <label>Description: <input type="text" th:field="*{description}" required/></label>
+    <label>Content: <textarea th:field="*{content}" required></textarea></label>
+    <label>Author: <input type="number" th:field="*{author}" required/></label>
+    <label>Slug: <input type="text" th:field="*{slug}" required></label>
+    <button type="submit">Save</button>
+</form>
+<a href="/articles">Back to list</a>
 </body>
 </html>
