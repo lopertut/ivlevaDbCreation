@@ -1,6 +1,7 @@
 package com.lopertut.dbcreation.controllers;
 
 import com.lopertut.dbcreation.entity.Article;
+import com.lopertut.dbcreation.entity.ArticleTag;
 import com.lopertut.dbcreation.services.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,6 +33,7 @@ public class ArticleController {
     @GetMapping("/create")
     public String showCreateForm(Model model) {
         model.addAttribute("article", new Article());
+        model.addAttribute("articleTag", new ArticleTag());
         return "articles/create";
     }
 
@@ -60,4 +62,21 @@ public class ArticleController {
         articleService. updateArticle(article);
         return "redirect:/articles";
     }
+
+    @GetMapping("/by-author/{authorId}")
+    public String getArticlesByAuthor(@PathVariable Long authorId, Model model) {
+        model.addAttribute("article", articleService.getArticleByAuthor(authorId));
+        return "articles/list";
+    }
+
+//    @GetMapping("/by-tag/{tagId}")
+//    public String getArticlesByTag(@PathVariable Long tagId, Model model) {
+//        model.addAttribute("article", articleService.getArticleByTag(tagId));
+//        return "articles/list";
+//    }
+
+//    @GetMapping("/search")
+//    public String search() {
+//
+//    }
 }

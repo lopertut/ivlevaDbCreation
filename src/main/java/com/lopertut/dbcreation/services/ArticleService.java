@@ -25,6 +25,16 @@ public class ArticleService implements IArticleService {
     }
 
     @Override
+    public Optional<Article> getArticleByAuthor(Long authorId) {
+        return articleRepository.findByAuthorId(authorId);
+    }
+
+//    @Override
+//    public Optional<Article> getArticleByTag(Long tagId) {
+//        return articleRepository.findByTagId(tagId);
+//    }
+
+    @Override
     public Article createArticle(Article article) {
         return articleRepository.save(article);
     }
