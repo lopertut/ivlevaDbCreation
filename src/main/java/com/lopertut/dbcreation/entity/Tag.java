@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @NoArgsConstructor
@@ -24,8 +26,15 @@ public class Tag {
     @CreationTimestamp
     private Date created_at;
 
+    @OneToMany(mappedBy = "tag", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<ArticleTag> articleTags = new HashSet<>();
+
     public long getId() {
         return id;
+    }
+
+    public Set<ArticleTag> getArticleTags() {
+        return articleTags;
     }
 
     public String getName() {
@@ -38,6 +47,10 @@ public class Tag {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public void setArticleTags(Set<ArticleTag> articleTags) {
+        this.articleTags = articleTags;
     }
 
     public void setName(String name) {

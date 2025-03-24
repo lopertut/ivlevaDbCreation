@@ -14,6 +14,13 @@
     <p><strong>Content:</strong> <span th:text="${article.content}"></span></p>
     <p><strong>Author:</strong> <span th:text="${article.author.getUsername()}"></span></p>
     <p><strong>Slug:</strong> <span th:text="${article.slug}"></span></p>
+    <p><strong>Tags:</strong>
+        <span th:each="articleTag : ${article.articleTags}">
+        <span th:text="${articleTag.tag.name}"></span>
+        <span th:if="${not articleTagStat.last}">, </span>
+    </span>
+        <span th:if="${article.articleTags.isEmpty()}">No tags</span>
+    </p>
     <p><strong>Published At:</strong> <span th:text="${#dates.format(article.uploaded_at, 'yyyy-MM-dd HH:mm:ss')}" ></span></p>
 </div>
 

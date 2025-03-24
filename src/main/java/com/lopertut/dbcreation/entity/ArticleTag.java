@@ -1,44 +1,59 @@
 package com.lopertut.dbcreation.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.Date;
-import java.util.Set;
 
 @Entity
-@Setter
-@Getter
-@AllArgsConstructor
-@NoArgsConstructor
 @Table(name = "article_tag")
 public class ArticleTag {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @GeneratedValue
+    private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "article_id", nullable = false)
+    private Article article;
+
+    @ManyToOne
+    @JoinColumn(name = "tag_id", nullable = false)
+    private Tag tag;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false, updatable = false)
     @CreationTimestamp
-    private Date created_at;
+    private Date createdAt;
 
-    @ManyToMany
-    @JoinTable(
-            name = "article_tag_mapping",
-            joinColumns = @JoinColumn(name = "tag_id"),
-            inverseJoinColumns = @JoinColumn(name = "article_id")
-    )
-    private Set<Article> articles;
+    public Long getId() {
+        return id;
+    }
 
-    @ManyToMany
-    @JoinTable(
-            name = "article_tag_mapping",
-            joinColumns = @JoinColumn(name = "article_id"),
-            inverseJoinColumns = @JoinColumn(name = "tag_id")
-    )
-    private Set<Tag> tags;
+    public Article getArticle() {
+        return article;
+    }
+
+    public Tag getTag() {
+        return tag;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setArticle(Article article) {
+        this.article = article;
+    }
+
+    public void setTag(Tag tag) {
+        this.tag = tag;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
 }

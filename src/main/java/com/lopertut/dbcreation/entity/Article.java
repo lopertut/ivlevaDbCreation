@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import java.util.Date;
+import java.util.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -43,6 +43,9 @@ public class Article {
     @Column(nullable = false, length = 1000)
     private String content;
 
+    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ArticleTag> articleTags = new ArrayList<>();
+
     public long getId() {
         return id;
     }
@@ -53,6 +56,10 @@ public class Article {
 
     public Date getUploaded_at() {
         return uploaded_at;
+    }
+
+    public List<ArticleTag> getArticleTags() {
+        return articleTags;
     }
 
     public User getAuthor() {
@@ -81,6 +88,10 @@ public class Article {
 
     public void setCreated_at(Date created_at) {
         this.created_at = created_at;
+    }
+
+    public void setArticleTags(List<ArticleTag> articleTags) {
+        this.articleTags = articleTags;
     }
 
     public void setUploaded_at(Date uploaded_at) {

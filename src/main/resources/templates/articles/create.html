@@ -6,18 +6,37 @@
 </head>
 <body>
 <h2>Create New Article</h2>
-<form action="/articles/create" method="post" th:object="${article}, ${articleTag}">
-    <label>Title: <input type="text" th:field="*{title}" required/></label>
-    <label>Description: <input type="text" th:field="*{description}" required/></label>
-    <label>Content: <textarea th:field="*{content}" required></textarea></label>
-    <label>Author: <input type="number" th:field="*{author}" required/></label>
-    <label>Slug: <input type="text" th:field="*{slug}" required></label>
-    <button type="submit">Save</button>
+
+<form th:action="@{/articles/create}" method="post" th:object="${article}">
+    <div>
+        <label>Title: <input type="text" th:field="*{title}" required /></label>
+    </div>
+    <div>
+        <label>Description: <input type="text" th:field="*{description}" required /></label>
+    </div>
+    <div>
+        <label>Content: <textarea th:field="*{content}" required></textarea></label>
+    </div>
+    <div>
+        <label>Author ID: <input type="number" th:field="*{author.id}" required /></label>
+    </div>
+    <div>
+        <label>Slug: <input type="text" th:field="*{slug}" required /></label>
+    </div>
+
+    <div>
+        <label>Tags:
+            <select multiple th:field="*{articleTags}" required>
+                <option th:each="tag : ${allTags}"
+                        th:value="${tag.id}"
+                        th:text="${tag.name}"></option>
+            </select>
+        </label>
+    </div>
+
+    <button type="submit">Save Article</button>
 </form>
 
-<form action="/articles/create" method="post" th:object="${articleTag}">
-    <label>Tag id: <input type="number" th:field="*{tags}"> </label>
-</form>
-<a href="/articles">Back to list</a>
+<a th:href="@{/articles}">Back to list</a>
 </body>
 </html>

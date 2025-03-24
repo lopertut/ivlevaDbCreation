@@ -3,11 +3,13 @@ package com.lopertut.dbcreation.controllers;
 import com.lopertut.dbcreation.entity.Article;
 import com.lopertut.dbcreation.entity.ArticleTag;
 import com.lopertut.dbcreation.services.ArticleService;
+import com.lopertut.dbcreation.services.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -16,6 +18,9 @@ public class ArticleController {
 
     @Autowired
     private ArticleService articleService;
+
+    @Autowired
+    private TagService tagService;
 
     @GetMapping
     public String getAllArticles(Model model) {
@@ -33,13 +38,20 @@ public class ArticleController {
     @GetMapping("/create")
     public String showCreateForm(Model model) {
         model.addAttribute("article", new Article());
+        model.addAttribute("allTags", tagService.getAllTags());
         model.addAttribute("articleTag", new ArticleTag());
         return "articles/create";
     }
 
     @PostMapping("/create")
-    public String createArticle(@ModelAttribute("article") Article article) {
-        articleService.createArticle(article);
+    public String createArticle(@ModelAttribute Article article, @RequestParam(required = false) List<Long> tags) {
+        Article savedArticle = articleService.createArticle(article);
+
+        if (tags != null) {
+            for (Long tagId : tags) {
+                articleService.addTagToArticle(savedArticle.getId(), tagId);
+            }
+        }
         return "redirect:/articles";
     }
 
@@ -69,11 +81,11 @@ public class ArticleController {
         return "articles/list";
     }
 
-//    @GetMapping("/by-tag/{tagId}")
-//    public String getArticlesByTag(@PathVariable Long tagId, Model model) {
-//        model.addAttribute("article", articleService.getArticleByTag(tagId));
-//        return "articles/list";
-//    }
+    @GetMapping("/by-tag/{tagId}")
+    public String getArticlesByTag(@PathVariable Long tagId, Model model) {
+        model.addAttribute("article", articleService.getArticlesByTag(tagId));
+        return "articles/list";
+    }
 
 //    @GetMapping("/search")
 //    public String search() {

@@ -9,8 +9,9 @@ public interface IArticleService {
     List<Article> getAllArticles();
     Optional<Article> getArticleById(Long id);
     Optional<Article> getArticleByAuthor(Long authorId);
-//    Optional<Article> getArticleByTag(Long tagId);
+    List<Article> getArticlesByTag(Long tagId);
     Article createArticle(Article article);
     Article updateArticle(Article article);
     void deleteArticle(Long id);
+    void addTagToArticle(Long articleId, Long tagId);
 }

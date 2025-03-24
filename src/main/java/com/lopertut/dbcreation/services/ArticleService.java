@@ -1,18 +1,26 @@
 package com.lopertut.dbcreation.services;
 
 import com.lopertut.dbcreation.entity.Article;
+import com.lopertut.dbcreation.entity.ArticleTag;
+import com.lopertut.dbcreation.entity.Tag;
 import com.lopertut.dbcreation.repositories.ArticleRepository;
+import com.lopertut.dbcreation.repositories.ArticleTagRepository;
+import com.lopertut.dbcreation.repositories.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
 
 @Service
 public class ArticleService implements IArticleService {
 
     @Autowired
     ArticleRepository articleRepository;
+    ArticleTagRepository articleTagRepository;
+    TagRepository tagRepository;
 
     @Override
     public List<Article> getAllArticles() {
@@ -29,10 +37,27 @@ public class ArticleService implements IArticleService {
         return articleRepository.findByAuthorId(authorId);
     }
 
-//    @Override
-//    public Optional<Article> getArticleByTag(Long tagId) {
-//        return articleRepository.findByTagId(tagId);
-//    }
+    @Override
+    public List<Article> getArticlesByTag(Long tagId) {
+        return articleTagRepository.findByTagId(tagId)
+                .stream()
+                .map(ArticleTag::getArticle)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public void addTagToArticle(Long articleId, Long tagId) {
+        if (!articleTagRepository.existsByArticleIdAndTagId(articleId, tagId)) {
+            Article article = articleRepository.findById(articleId).orElseThrow();
+            Tag tag = tagRepository.findById(tagId).orElseThrow();
+
+            ArticleTag articleTag = new ArticleTag();
+            articleTag.setArticle(article);
+            articleTag.setTag(tag);
+
+            articleTagRepository.save(articleTag);
+        }
+    }
 
     @Override
     public Article createArticle(Article article) {
