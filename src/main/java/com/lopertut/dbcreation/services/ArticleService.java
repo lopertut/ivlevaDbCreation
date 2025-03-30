@@ -6,7 +6,6 @@ import com.lopertut.dbcreation.entity.Tag;
 import com.lopertut.dbcreation.repositories.ArticleRepository;
 import com.lopertut.dbcreation.repositories.ArticleTagRepository;
 import com.lopertut.dbcreation.repositories.TagRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,10 +16,15 @@ import java.util.stream.Collectors;
 @Service
 public class ArticleService implements IArticleService {
 
-    @Autowired
-    ArticleRepository articleRepository;
-    ArticleTagRepository articleTagRepository;
-    TagRepository tagRepository;
+    private final ArticleRepository articleRepository;
+    private final TagRepository tagRepository;
+    private final ArticleTagRepository articleTagRepository;
+
+    public ArticleService(ArticleRepository articleRepository, TagRepository tagRepository, ArticleTagRepository articleTagRepository) {
+        this.articleRepository = articleRepository;
+        this.tagRepository = tagRepository;
+        this.articleTagRepository = articleTagRepository;
+    }
 
     @Override
     public List<Article> getAllArticles() {
@@ -46,7 +50,7 @@ public class ArticleService implements IArticleService {
     }
 
     @Override
-    public void addTagToArticle(Long articleId, Long tagId) {
+    public ArticleTag addTagToArticle(Long articleId, Long tagId) {
         if (!articleTagRepository.existsByArticleIdAndTagId(articleId, tagId)) {
             Article article = articleRepository.findById(articleId).orElseThrow();
             Tag tag = tagRepository.findById(tagId).orElseThrow();
@@ -54,8 +58,9 @@ public class ArticleService implements IArticleService {
             ArticleTag articleTag = new ArticleTag();
             articleTag.setArticle(article);
             articleTag.setTag(tag);
-
-            articleTagRepository.save(articleTag);
+            return articleTagRepository.save(articleTag);
+        }else {
+            throw new RuntimeException("Tag already assigned to this article");
         }
     }
 

@@ -44,12 +44,14 @@ public class ArticleController {
     }
 
     @PostMapping("/create")
-    public String createArticle(@ModelAttribute Article article, @RequestParam(required = false) List<Long> tags) {
-        Article savedArticle = articleService.createArticle(article);
+    public String createArticle(@ModelAttribute("article") Article article, @RequestParam("tags") List<Long> tags) {
+        Article newArticle = articleService.createArticle(article);
+        System.out.println(newArticle.getId());
 
         if (tags != null) {
             for (Long tagId : tags) {
-                articleService.addTagToArticle(savedArticle.getId(), tagId);
+                System.out.println(tagId);
+                articleService.addTagToArticle(newArticle.getId(), tagId);
             }
         }
         return "redirect:/articles";

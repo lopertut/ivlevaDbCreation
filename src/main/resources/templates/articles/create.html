@@ -26,7 +26,7 @@
 
     <div>
         <label>Tags:
-            <select multiple th:field="*{articleTags}" required>
+            <select multiple name="tags" required>
                 <option th:each="tag : ${allTags}"
                         th:value="${tag.id}"
                         th:text="${tag.name}"></option>

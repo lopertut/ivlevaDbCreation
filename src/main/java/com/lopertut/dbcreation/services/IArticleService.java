@@ -1,6 +1,7 @@
 package com.lopertut.dbcreation.services;
 
 import com.lopertut.dbcreation.entity.Article;
+import com.lopertut.dbcreation.entity.ArticleTag; 
 
 import java.util.List;
 import java.util.Optional;
@@ -13,5 +14,5 @@ public interface IArticleService {
     Article createArticle(Article article);
     Article updateArticle(Article article);
     void deleteArticle(Long id);
-    void addTagToArticle(Long articleId, Long tagId);
+    ArticleTag addTagToArticle(Long articleId, Long tagId);
 }
