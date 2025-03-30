@@ -1,6 +1,7 @@
 package com.lopertut.dbcreation.controllers;
 
 import com.lopertut.dbcreation.entity.User;
+import com.lopertut.dbcreation.repositories.ArticleRepository;
 import com.lopertut.dbcreation.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,8 +14,13 @@ import java.util.Optional;
 @RequestMapping("/users")
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+    private final ArticleRepository articleRepository;
+
+    public UserController(UserService userService, ArticleRepository articleRepository) {
+        this.userService = userService;
+        this.articleRepository = articleRepository;
+    }
 
     @GetMapping
     public String getAllUsers(Model model) {
@@ -41,7 +47,7 @@ public class UserController {
         return "redirect:/users";
     }
 
-    @GetMapping("/{id}/delete")
+    @DeleteMapping("/{id}/delete")
     public String deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
         return "redirect:/users";

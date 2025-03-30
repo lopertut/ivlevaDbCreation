@@ -5,7 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,6 +22,17 @@ public class User {
     @Column(nullable = false, updatable = false)
     @CreationTimestamp
     private Date created_at;
+
+    public void setArticles(List<Article> articles) {
+        this.articles = articles;
+    }
+
+    public List<Article> getArticles() {
+        return articles;
+    }
+
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Article> articles = new ArrayList<>();
 
     @Column(nullable = false, length = 30)
     private String email;

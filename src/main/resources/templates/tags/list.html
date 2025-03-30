@@ -20,8 +20,11 @@
         <td th:text="${tag.getId()}"></td>
         <td th:text="${tag.getName()}"></td>
         <td>
-            <a th:href="@{/tags/{id}/delete (id=${tag.getId()})}"
-               onclick="return confirm('are you sure?')">Delete</a>
+            <form th:action="@{/tags/{id}/delete (id=${tag.getId()})}" method="post"
+                  onsubmit="return confirm('Are you sure you want to delete this tag?');">
+                <input type="hidden" name="_method" value="DELETE">
+                <button type="submit">Delete</button>
+            </form>
         </td>
     </tr>
     </TBODY>

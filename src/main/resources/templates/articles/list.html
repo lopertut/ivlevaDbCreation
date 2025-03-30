@@ -42,8 +42,11 @@
         <p th:text="${article.description}">Краткое описание статьи.</p>
 
         <a th:href="@{/articles/{id} (id=${article.getId()})}">Details</a>
-        <a th:href="@{/articles/{id}/delete (id=${article.getId()})}"
-           onclick="return confirm('are you sure?')">Delete</a>
+        <form th:action="@{/articles/{id}/delete (id=${article.getId()})}" method="post"
+              onsubmit="return confirm('Are you sure you want to delete this article?');">
+            <input type="hidden" name="_method" value="DELETE">
+            <button type="submit">Delete</button>
+        </form>
     </div>
 </div>
 <a href="articles/create">create new article</a>

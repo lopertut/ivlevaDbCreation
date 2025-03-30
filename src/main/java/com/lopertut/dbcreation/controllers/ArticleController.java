@@ -60,12 +60,11 @@ public class ArticleController {
         return "redirect:/articles";
     }
 
-    @GetMapping("/{id}/delete")
+    @DeleteMapping("/{id}/delete")
     public String deleteArticle(@PathVariable Long id) {
         articleService.deleteArticle(id);
         return "redirect:/articles";
     }
-
 
     @GetMapping("/{id}/update")
     public String showUpdateForm(@PathVariable Long id, Model model) {

@@ -1,8 +1,8 @@
 package com.lopertut.dbcreation.services;
 
 import com.lopertut.dbcreation.entity.User;
+import com.lopertut.dbcreation.repositories.ArticleRepository;
 import com.lopertut.dbcreation.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,8 +11,11 @@ import java.util.Optional;
 @Service
 public class UserService implements IUserService {
 
-    @Autowired
-    UserRepository userRepository;
+    private final UserRepository userRepository;
+
+    public UserService(UserRepository userRepository, ArticleRepository articleRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     public List<User> getAllUsers() {

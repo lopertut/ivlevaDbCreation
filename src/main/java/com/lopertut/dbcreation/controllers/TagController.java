@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/tags")
 public class TagController {
 
-    @Autowired
-    private TagService tagService;
+    private final TagService tagService;
+
+    public TagController(TagService tagService) {
+        this.tagService = tagService;
+    }
 
     @GetMapping
     public String getAllTags(Model model) {
@@ -33,7 +36,7 @@ public class TagController {
         return "redirect:/tags";
     }
 
-    @GetMapping("/{id}/delete")
+    @DeleteMapping("/{id}/delete")
     public String deleteTag(@PathVariable Long id) {
         tagService.deleteTag(id);
         return "redirect:/tags";
