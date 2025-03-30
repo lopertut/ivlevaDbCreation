@@ -2,6 +2,7 @@ package com.lopertut.dbcreation.controllers;
 
 import com.lopertut.dbcreation.entity.Article;
 import com.lopertut.dbcreation.entity.ArticleTag;
+import com.lopertut.dbcreation.repositories.ArticleTagRepository;
 import com.lopertut.dbcreation.services.ArticleService;
 import com.lopertut.dbcreation.services.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +17,13 @@ import java.util.Optional;
 @RequestMapping("/articles")
 public class ArticleController {
 
-    @Autowired
-    private ArticleService articleService;
+    private final ArticleService articleService;
+    private final TagService tagService;
 
-    @Autowired
-    private TagService tagService;
+    public ArticleController(ArticleService articleService, TagService tagService) {
+        this.articleService = articleService;
+        this.tagService = tagService;
+    }
 
     @GetMapping
     public String getAllArticles(Model model) {
@@ -79,13 +82,13 @@ public class ArticleController {
 
     @GetMapping("/by-author/{authorId}")
     public String getArticlesByAuthor(@PathVariable Long authorId, Model model) {
-        model.addAttribute("article", articleService.getArticleByAuthor(authorId));
+        model.addAttribute("articles", articleService.getArticlesByAuthor(authorId));
         return "articles/list";
     }
 
     @GetMapping("/by-tag/{tagId}")
     public String getArticlesByTag(@PathVariable Long tagId, Model model) {
-        model.addAttribute("article", articleService.getArticlesByTag(tagId));
+        model.addAttribute("articles", articleService.getArticlesByTag(tagId));
         return "articles/list";
     }
 

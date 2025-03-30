@@ -37,7 +37,7 @@ public class ArticleService implements IArticleService {
     }
 
     @Override
-    public Optional<Article> getArticleByAuthor(Long authorId) {
+    public List<Article> getArticlesByAuthor(Long authorId) {
         return articleRepository.findByAuthorId(authorId);
     }
 
