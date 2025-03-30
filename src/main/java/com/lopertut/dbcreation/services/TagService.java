@@ -10,8 +10,11 @@ import java.util.List;
 @Service
 public class TagService implements ITagService{
 
-    @Autowired
     TagRepository tagRepository;
+
+    public TagService(TagRepository tagRepository) {
+        this.tagRepository = tagRepository;
+    }
 
     @Override
     public List<Tag> getAllTags() {

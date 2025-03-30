@@ -15,4 +15,5 @@ public interface IArticleService {
     Article updateArticle(Article article);
     void deleteArticle(Long id);
     ArticleTag addTagToArticle(Long articleId, Long tagId);
+    List<Article> getArticleByTitle(String title);
 }

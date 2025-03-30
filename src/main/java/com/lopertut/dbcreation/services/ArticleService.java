@@ -65,6 +65,11 @@ public class ArticleService implements IArticleService {
     }
 
     @Override
+    public List<Article> getArticleByTitle(String title) {
+        return articleRepository.findByTitle(title);
+    }
+
+    @Override
     public Article createArticle(Article article) {
         return articleRepository.save(article);
     }

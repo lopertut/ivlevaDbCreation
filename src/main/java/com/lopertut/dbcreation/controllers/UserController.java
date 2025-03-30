@@ -3,7 +3,6 @@ package com.lopertut.dbcreation.controllers;
 import com.lopertut.dbcreation.entity.User;
 import com.lopertut.dbcreation.repositories.ArticleRepository;
 import com.lopertut.dbcreation.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;

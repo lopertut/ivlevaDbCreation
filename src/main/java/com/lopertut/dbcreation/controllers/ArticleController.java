@@ -2,10 +2,8 @@ package com.lopertut.dbcreation.controllers;
 
 import com.lopertut.dbcreation.entity.Article;
 import com.lopertut.dbcreation.entity.ArticleTag;
-import com.lopertut.dbcreation.repositories.ArticleTagRepository;
 import com.lopertut.dbcreation.services.ArticleService;
 import com.lopertut.dbcreation.services.TagService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -91,8 +89,9 @@ public class ArticleController {
         return "articles/list";
     }
 
-//    @GetMapping("/search")
-//    public String search() {
-//
-//    }
+    @GetMapping("/search/{title}")
+    public String search(@PathVariable String title, Model model) {
+        model.addAttribute("title", articleService.getArticleByTitle(title));
+        return "articles/list";
+    }
 }
