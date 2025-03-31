@@ -11,8 +11,8 @@ Article
 config - Конфигурация Spring Security
 controller - Контроллеры 
 entity - Сущности которые представляют таблицы в базе данных и их отношения
-repositories - 
-services - 
+repositories - Интерфейсы Spring Data JPA для работы с БД
+services - бизнес логика и их интерфейсы
 DbCreationApplication - Главный класс для запуска программы
 resources - Папка для хранения статических и конфигурационных файлов
 static - Папка для статичных файлов
