@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Create New Tag</title>
+    <link rel="stylesheet" th:href="@{/styles.css}">
 </head>
 <body>
 <h2>Create New Tag</h2>
-<form action="/tags/create" method="post" th:object="${tag}">
+<form th:action="@{/tags/create}" method="post" th:object="${tag}">
     <label>Name: <input type="text" th:field="*{name}" required/></label>
     <button type="submit">save</button>
 </form>

@@ -3,6 +3,7 @@ package com.lopertut.dbcreation.services;
 import com.lopertut.dbcreation.entity.User;
 import com.lopertut.dbcreation.repositories.ArticleRepository;
 import com.lopertut.dbcreation.repositories.UserRepository;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,6 +30,9 @@ public class UserService implements IUserService {
 
     @Override
     public User createUser(User user) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encodedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
         return userRepository.save(user);
     }
 

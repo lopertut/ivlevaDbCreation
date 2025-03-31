@@ -23,17 +23,6 @@ public class User {
     @CreationTimestamp
     private Date created_at;
 
-    public void setArticles(List<Article> articles) {
-        this.articles = articles;
-    }
-
-    public List<Article> getArticles() {
-        return articles;
-    }
-
-    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Article> articles = new ArrayList<>();
-
     @Column(nullable = false, length = 30)
     private String email;
 
@@ -46,8 +35,31 @@ public class User {
     @Column(nullable = false, length = 200)
     private String password;
 
-    @Column(nullable = false, length = 500)
+    @Column(length = 500)
     private String bio;
+
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Article> articles = new ArrayList<>();
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Roles role = Roles.ROLE_USER;
+
+    public void setRole(Roles role) {
+        this.role = role;
+    }
+
+    public Roles getRole() {
+        return role;
+    }
+
+    public void setArticles(List<Article> articles) {
+        this.articles = articles;
+    }
+
+    public List<Article> getArticles() {
+        return articles;
+    }
 
     public void setBio(String bio) {
         this.bio = bio;
