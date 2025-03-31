@@ -6,7 +6,14 @@
   <link rel="stylesheet" th:href="@{/styles.css}">
 </head>
 <body>
+<nav>
+  <a th:href="@{/login}">Login</a>
+  <a th:href="@{/registration}">register</a>
+  <a href="users">users</a>
+</nav>
+
 <h2>Create New User</h2>
+
 <form action="/users/create" method="post" th:object="${user}">
   <label>username: <input type="text" th:field="*{username}" required/></label>
   <label>password: <input type="password" th:field="*{password}" required></label>

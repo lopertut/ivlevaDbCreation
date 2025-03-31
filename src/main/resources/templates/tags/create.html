@@ -6,6 +6,12 @@
     <link rel="stylesheet" th:href="@{/styles.css}">
 </head>
 <body>
+<nav>
+    <a th:href="@{/login}">Login</a>
+    <a th:href="@{/registration}">Register</a>
+    <a href="users">Users</a>
+    <a href="articles">Articles</a>
+</nav>
 <h2>Create New Tag</h2>
 <form th:action="@{/tags/create}" method="post" th:object="${tag}">
     <label>Name: <input type="text" th:field="*{name}" required/></label>

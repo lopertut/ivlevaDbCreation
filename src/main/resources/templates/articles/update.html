@@ -6,6 +6,12 @@
     <link rel="stylesheet" th:href="@{/styles.css}">
 </head>
 <body>
+<nav>
+    <a th:href="@{/login}">Login</a>
+    <a th:href="@{/registration}">Register</a>
+    <a href="users">Users</a>
+    <a href="articles">Articles</a>
+</nav>
 <h2>Update Article</h2>
 
 <form th:action="@{/articles/{id}/update(id=${article.id})}" method="post" th:object="${article}">

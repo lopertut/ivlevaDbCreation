@@ -1,16 +1,29 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{styles.css}">
     <title>Статьи</title>
-    <link rel="stylesheet" th:href="@{/styles.css}">
 </head>
 <body>
+<nav>
+    <a th:href="@{/login}">Login</a>
+    <a th:href="@{/registration}">Register</a>
+    <a href="users">Users</a>
+    <a href="articles">Articles</a>
+
+    <div class="search-container">
+        <form th:action="@{/search}" method="get">
+            <input type="text" name="" placeholder="Search..." class="search-input">
+        </form>
+    </div>
+</nav>
 <div class="container">
     <div class="card" th:each="article : ${articles}">
         <h2 th:text="${article.title}">Заголовок статьи</h2>
         <p th:text="${article.description}">Краткое описание статьи.</p>
+        <p th:text="${article.uploaded_at}">Uploaded at</p>
 
         <a th:href="@{/articles/{id} (id=${article.getId()})}">Details</a>
         <form th:action="@{/articles/{id}/delete (id=${article.getId()})}" method="post"
@@ -21,8 +34,6 @@
     </div>
 </div>
 <a href="articles/create">create new article</a>
-<a href="users">users</a>
-
 <a href="articles/by-author/">find article by author</a>
 <a href="articles/by-tag/">find article by tag</a>
 </body>

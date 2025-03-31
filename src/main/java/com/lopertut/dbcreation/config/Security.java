@@ -63,13 +63,20 @@ public class Security {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authenticationProvider(daoAuthenticationProvider());
 
-        http.authorizeHttpRequests(auth ->
-                        auth.requestMatchers("/users").authenticated()
-                                .anyRequest().permitAll()
+        http.authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/articles", "/articles", "/articles/**").permitAll()
+                        .requestMatchers("/registration", "/login").permitAll()
+                        .requestMatchers("/static/**", "/styles.css").permitAll()
+
+                        .requestMatchers("/users/delete/**", "/tags/delete/**").hasRole("ADMIN")
+
+                        .anyRequest().authenticated()
+
                 )
                 .formLogin(login ->
                         login.usernameParameter("email")
-                                .defaultSuccessUrl("/users")
+//                                .loginPage("/login")
+                                .defaultSuccessUrl("/")
                                 .permitAll()
                 )
                 .logout(logout -> logout.logoutSuccessUrl("/").permitAll()
