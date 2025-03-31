@@ -75,8 +75,7 @@ public class Security {
                 )
                 .formLogin(login ->
                         login.usernameParameter("email")
-//                                .loginPage("/login")
-                                .defaultSuccessUrl("/")
+t                                 .defaultSuccessUrl("/")
                                 .permitAll()
                 )
                 .logout(logout -> logout.logoutSuccessUrl("/").permitAll()
